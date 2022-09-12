@@ -1,0 +1,47 @@
+.bg-white {
+    background-color: #fffffe;
+}
+
+.bg-headline {
+    background-color: #272343;
+}
+
+.fg-blue {
+    color: #bae8e8;
+}
+
+.bg-blue {
+    background-color: #edf9f9;
+}
+
+.border-blue-color {
+    border-color: #bae8e8;
+    border-radius: 10px;
+}
+
+.border-dashed {
+    border: dashed;
+    border-radius: 10px;
+    border-color: #bae8e8;
+}
+
+.upload-img {
+    width: 300px;
+    height: 300px;
+}
+
+.dragover:hover {
+    opacity: 0.6;
+}
+
+.drag-enter {
+    opacity: 0.6;
+}
+
+.drog-leave {
+    opacity: 1;
+}
+
+.input-field {
+    opacity: 0;
+}
