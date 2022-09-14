@@ -24,6 +24,7 @@ class App extends React.Component {
 
 	onDrop = (e) => {
 		e.preventDefault();
+		console.log(e.target.files[0]);
 		this.setState({
 			dropped: true,
 			onDrag: false,
@@ -38,6 +39,25 @@ class App extends React.Component {
 		})
 	}
 
+	onSend = (e) => {
+		e.preventDefault();
+		let data = new FormData();
+		axios.defaults.xsrfHeaderName = "X-CSRFTOKEN"
+		axios.defaults.xsrfCookieName = "csrftoken"
+
+		console.log(this.state.file);
+
+		data.append('file', this.state.file);
+
+		axios.post('/', data, {
+			headers: {
+				'Content-Type': 'multipart/form-data'
+			  }
+		})
+			.then(result => console.log(result))
+			.catch(errors => console.log(errors))
+	}
+
     render() {
         return (
 			<div className="container">
@@ -50,7 +70,7 @@ class App extends React.Component {
 								<div className="d-flex flex-column justify-content-center align-items-center">
 									<p>Merci d'avoir Uploadé !</p>
 									<div>
-										<button className="btn btn-primary">Analysez</button>
+										<button className="btn btn-primary" onClick={(e) => this.onSend(e)}>Analysez</button>
 									</div>
 								</div>
 								:
@@ -61,7 +81,7 @@ class App extends React.Component {
 									className={this.state.onDrag ? "card-body d-flex justify-content-center m-3 border-dashed bg-blue text-muted dragover drag-enter" : "card-body d-flex justify-content-center m-3 border-dashed bg-blue text-muted dragover"}
 								>
 									<img src="static/img/Stuck at Home - To Do List.png" className="card-img img-fluid upload-img" alt="Upload image" />
-									<input type="file" name="file" id="file" className="position-absolute w-75 h-75 input-field" onChange={(e) => this.onChange(e)} />
+									<input type="file" accept="application/pdf" name="file" id="file" className="position-absolute w-75 h-75 input-field" onChange={(e) => this.onChange(e)} />
 								</div>
 							}
 							
